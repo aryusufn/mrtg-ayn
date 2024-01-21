@@ -1,0 +1,24 @@
+# Systemd config for MRTG on Debian
+# 2021 Joao Eriberto Mota Filho <eriberto@debian.org>
+
+[Unit]
+Description=Multi Router Traffic Grapher
+Documentation=https://oss.oetiker.ch/mrtg/doc/index.en.html
+
+[Service]
+Environment=LANG=C
+ExecStart=/usr/bin/mrtg --daemon --fhs --user=mrtg
+KillMode=process
+LogsDirectory=mrtg
+LogsDirectoryMode=0750
+PIDFile=/run/mrtg/mrtg.pid
+PrivateTmp=yes
+ReadOnlyDirectories=/etc
+RuntimeDirectory=mrtg
+StateDirectory=mrtg
+StateDirectoryMode=0750
+Type=forking
+User=mrtg
+
+[Install]
+WantedBy=multi-user.target
